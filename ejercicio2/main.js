@@ -9,7 +9,7 @@ const raiz = Math.sqrt (bloque1)
 const raiz1 = (-b+raiz) / (2*a)
 const raiz2 = (-b-raiz) / (2*a)
 
-const r = 'raiz 1='+raiz1+' Raiz 2=' + raiz2; 
+const r = 'raiz 1= '+raiz1 +' raiz 2= ' + raiz2; 
 
 document.getElementById ("resultado").textContent = r;
 
