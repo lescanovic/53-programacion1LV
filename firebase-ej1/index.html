@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>firebase ej1</title>
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
     <body> 
         <nav class="navbar navbar-dark bg-secondary">
@@ -33,7 +34,10 @@
                         <input id= "inp_dni" placeholder="Ingrese DNI" type="number" class="form-control">
                     </div> 
 
-                     <button id="btn_guardar"class="btn btn-primary">Guardar cliente</button>
+                    <input id="inp_id" type="hidden">
+
+                     <button id="btn_guardar"class="btn btn-secondary">Guardar cliente</button>
+                     <button id ="btn_actualizar" style="display: none;" onclick = "actualizar_cliente ()" class="btn btn-primary">Actualizar</button>
 
                 </div>
 

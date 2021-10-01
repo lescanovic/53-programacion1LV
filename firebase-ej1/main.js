@@ -23,7 +23,7 @@ const guardar_cliente= () => {
     bd.collection('cliente').doc().set(uncliente)
     //reseteamos el formulario
     vaciar()
-
+    listar_clientes()
 
 }
 
@@ -37,7 +37,7 @@ let lc = []
 let lista_definitiva = lista.docs.map ( (doc) =>{
 
     lc=doc.data ()
-    lc.Id= doc.id
+    lc.id= doc.id
     return lc;
     })
 
@@ -52,15 +52,59 @@ let lista_definitiva = lista.docs.map ( (doc) =>{
             <td>${element.dni}</td>
 
             <td>
-                <button class="btn btn-danger btn-sm">X</button>
+                <button onclick="eliminar_cliente('${element.id}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                <button onclick= "llenar_formulario('${element.nombre}','${element.apellido}',${element.dni},'${element.id}')" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
             </td>
+
         <tr>    
-   
         `
         bolsita_tr.push(fila)
     });
+
+    //elimino las comillas
     document.getElementById("tbody").innerHTML = bolsita_tr.join('')
+}
+
+listar_clientes(); 
+
+function eliminar_cliente (id)
+{
+bd.collection("cliente").doc(id).delete()
+listar_clientes()
+}
+
+function llenar_formulario (nom,ape,dni,id)
+{
+//lleno los inp
+    document.getElementById("inp_nom").value = nom;
+    document.getElementById("inp_ape").value = ape;
+    document.getElementById("inp_dni").value = dni; 
+    document.getElementById("inp_id").value = id;
+
+    document.getElementById ("btn_guardar").style.display = 'none';
+    document.getElementById ("btn_actualizar"). style.display = 'block';
+
 
 }
-listar_clientes();
 
+function actualizar_cliente()
+{
+//recojo el valor del inp
+const nom = document.getElementById("inp_nom").value
+const ape = document.getElementById("inp_ape").value
+const dni = document.getElementById("inp_dni").value
+const id = document.getElementById("inp_id").value
+
+const clienteActualizado = {
+     nombre: nom,
+     apellido: ape,
+     dni: dni,
+}
+bd.collection ("cliente").doc (id).update(clienteActualizado)
+
+listar_clientes()
+vaciar ()
+document.getElementById ("btn_guardar").style.display = 'block'   
+document.getElementById ("btn_actualizar"). style.display = 'none' 
+
+}
